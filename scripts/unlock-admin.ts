@@ -9,6 +9,7 @@ async function main() {
     process.exit(1);
   }
   const payload = await getPayload({ config });
+  // @ts-expect-error unlock only needs email
   await payload.unlock({ collection: "users", data: { email } });
   console.log(`✓ unlocked ${email}`);
   process.exit(0);

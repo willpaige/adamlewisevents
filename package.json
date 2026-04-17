@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "devsafe": "rm -rf .next && next dev",
-    "build": "payload migrate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "payload": "payload",

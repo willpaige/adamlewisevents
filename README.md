@@ -64,20 +64,12 @@ Pages use ISR with `revalidate: 60`, so edits appear within a minute.
    - `DATABASE_URI` (pooled)
    - `PAYLOAD_SECRET` (32+ random bytes: `openssl rand -base64 32`)
    - `NEXT_PUBLIC_SERVER_URL` (your production URL)
-3. Vercel runs `pnpm build`, which runs `payload migrate && next build`.
+3. Vercel runs `pnpm build` → `next build`.
 4. After the first deploy, run the seed once against production by setting the env vars locally and running `pnpm seed`, or create content directly in `/admin`.
 
-### Migrations
+### Schema changes
 
-Dev uses Payload's `push` mode (drizzle syncs schema automatically on start). For production we use real migrations:
-
-```bash
-# Locally, after editing any collection/global:
-pnpm payload migrate:create
-git add src/migrations && git commit -m "migration: ..."
-```
-
-On Vercel, `pnpm build` runs `payload migrate` before `next build`.
+We use Payload's `push` mode (drizzle syncs the schema on boot). Edit a collection/global, deploy, and the Neon schema updates automatically on the first request. For larger schemas or multi-env setups you can flip to managed migrations via `payload migrate:create`; it's not needed here.
 
 ---
 
