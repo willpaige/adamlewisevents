@@ -1,0 +1,2649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Lewis DJ — Festivals, Residencies & Weddings | Bournemouth & South Coast</title>
+    <meta name="description" content="Former Hed Kandi resident with 25+ years on the decks. Festival, club, wedding and private event DJ across Bournemouth, Christchurch, Dorset and the South Coast.">
+    <meta name="keywords" content="DJ Bournemouth, festival DJ, wedding DJ Dorset, Hed Kandi, Christchurch Music Festival, Henley Regatta DJ, club DJ South Coast, Post Bournemouth, V Nightclub, Aruba, Cameo">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F0F0F;
+            --bg-elevated: #171717;
+            --bg-card: #1C1C1C;
+            --bg-subtle: #222222;
+            --text: #F5F2EE;
+            --text-mid: #A8A29E;
+            --text-dim: #6B6560;
+            --accent: #C8956C;
+            --accent-hover: #D4A57E;
+            --accent-pale: rgba(200, 149, 108, 0.1);
+            --accent-glow: rgba(200, 149, 108, 0.06);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --white: #FFFFFF;
+            --display: 'Manrope', system-ui, sans-serif;
+            --body: 'DM Sans', system-ui, sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--body);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Subtle noise texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
+
+        /* ── UTILITY ── */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 clamp(20px, 5vw, 72px);
+        }
+
+        .section-label {
+            font-family: var(--body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+
+        .section-heading {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
+            line-height: 1.1;
+            color: var(--text);
+            letter-spacing: -0.035em;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.03em;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--body);
+            font-size: 0.76rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            color: var(--bg) !important;
+            background: var(--accent);
+            padding: 10px 24px;
+            font-weight: 500 !important;
+            transition: background 0.3s ease, transform 0.3s ease !important;
+            border-radius: 2px;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover) !important;
+            color: var(--bg) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 28px;
+            height: 18px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background: var(--text);
+            position: absolute;
+            left: 0;
+            transition: all 0.35s ease;
+        }
+
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .menu-toggle span:nth-child(3) { bottom: 0; }
+
+        .menu-toggle.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: var(--display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover { color: var(--accent); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            max-width: 700px;
+            max-height: 700px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation: gradientShift 8s ease infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: radial-gradient(circle, rgba(200, 149, 108, 0.03) 0%, transparent 70%);
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: clamp(40px, 6vw, 100px);
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--body);
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 1.6rem;
+            animation: fadeUp 0.7s ease both 0.15s;
+        }
+
+        .hero-location svg {
+            width: 12px;
+            height: 12px;
+            color: var(--accent);
+        }
+
+        .hero-label {
+            font-family: var(--body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.6rem;
+            animation: fadeUp 0.7s ease both 0.2s;
+        }
+
+        .hero-title {
+            font-family: var(--display);
+            font-size: clamp(2.6rem, 5.2vw, 4.6rem);
+            font-weight: 800;
+            line-height: 1.04;
+            color: var(--text);
+            letter-spacing: -0.045em;
+            margin-bottom: 1.8rem;
+            animation: fadeUp 0.7s ease both 0.35s;
+        }
+
+        .hero-title .accent {
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-family: var(--body);
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-mid);
+            max-width: 440px;
+            margin-bottom: 2.4rem;
+            animation: fadeUp 0.7s ease both 0.5s;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            animation: fadeUp 0.7s ease both 0.65s;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            font-family: var(--body);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--accent);
+            padding: 16px 34px;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(200, 149, 108, 0.2);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .btn-secondary:hover { color: var(--accent); }
+        .btn-secondary svg { transition: transform 0.3s ease; }
+        .btn-secondary:hover svg { transform: translateX(4px); }
+
+        /* Hero visual — audio visualiser */
+        .hero-visual {
+            position: relative;
+            animation: fadeIn 1s ease both 0.5s;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .hero-image-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(165deg, rgba(200, 149, 108, 0.04) 0%, transparent 50%);
+        }
+
+        .hero-vis {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .hero-vis .bar {
+            width: 3px;
+            height: 60%;
+            background: linear-gradient(to top, var(--accent), rgba(200, 149, 108, 0.2));
+            border-radius: 2px;
+            transform-origin: bottom;
+            animation: pulse 1.2s ease infinite;
+        }
+
+        .hero-vis .bar:nth-child(1) { animation-delay: 0s; height: 30%; }
+        .hero-vis .bar:nth-child(2) { animation-delay: 0.15s; height: 50%; }
+        .hero-vis .bar:nth-child(3) { animation-delay: 0.3s; height: 70%; }
+        .hero-vis .bar:nth-child(4) { animation-delay: 0.1s; height: 45%; }
+        .hero-vis .bar:nth-child(5) { animation-delay: 0.4s; height: 80%; }
+        .hero-vis .bar:nth-child(6) { animation-delay: 0.2s; height: 55%; }
+        .hero-vis .bar:nth-child(7) { animation-delay: 0.35s; height: 65%; }
+        .hero-vis .bar:nth-child(8) { animation-delay: 0.05s; height: 40%; }
+        .hero-vis .bar:nth-child(9) { animation-delay: 0.25s; height: 60%; }
+        .hero-vis .bar:nth-child(10) { animation-delay: 0.45s; height: 35%; }
+        .hero-vis .bar:nth-child(11) { animation-delay: 0.1s; height: 50%; }
+        .hero-vis .bar:nth-child(12) { animation-delay: 0.3s; height: 72%; }
+        .hero-vis .bar:nth-child(13) { animation-delay: 0.15s; height: 48%; }
+        .hero-vis .bar:nth-child(14) { animation-delay: 0.4s; height: 58%; }
+        .hero-vis .bar:nth-child(15) { animation-delay: 0.2s; height: 42%; }
+
+        .hero-initials {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hero-initials span {
+            font-family: var(--display);
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 800;
+            color: rgba(245, 242, 238, 0.04);
+            letter-spacing: -0.06em;
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: -14px;
+            left: -14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 18px 26px;
+            z-index: 3;
+            border-radius: 3px;
+        }
+
+        .hero-badge-num {
+            font-family: var(--display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-badge-label {
+            font-family: var(--body);
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ── TRUST BAR ── */
+        .trust-bar {
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-bar .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(24px, 4vw, 56px);
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--body);
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            letter-spacing: 0.02em;
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* ── MARQUEE ── */
+        .marquee-section {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-family: var(--display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            white-space: nowrap;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .marquee-item::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            opacity: 0.5;
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            padding: clamp(80px, 10vw, 140px) 0;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: clamp(40px, 6vw, 100px);
+            align-items: start;
+        }
+
+        .about-left { position: sticky; top: 100px; }
+
+        .about-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1.3rem;
+        }
+
+        .about-name {
+            font-family: var(--display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 1.8rem;
+            letter-spacing: -0.02em;
+        }
+
+        .about-role {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-val {
+            font-family: var(--display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .stat-desc {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        /* ── RESIDENCIES ── */
+        .residencies {
+            padding: clamp(80px, 10vw, 140px) 0;
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .residencies::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 85% 20%, var(--accent-glow) 0%, transparent 45%),
+                radial-gradient(ellipse at 10% 90%, var(--accent-glow) 0%, transparent 40%);
+        }
+
+        .residencies .container { position: relative; z-index: 1; }
+        .residencies .section-heading { margin-bottom: 1rem; }
+
+        .res-sub {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-mid);
+            max-width: 600px;
+            margin-bottom: 3.5rem;
+        }
+
+        .res-groups {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(32px, 5vw, 64px);
+        }
+
+        .res-group-label {
+            font-family: var(--body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .res-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .res-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: baseline;
+            padding: 16px 2px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .res-item:hover { padding-left: 10px; }
+        .res-item:hover .res-name { color: var(--accent); }
+
+        .res-name {
+            font-family: var(--display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            transition: color 0.3s ease;
+        }
+
+        .res-meta {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            letter-spacing: 0.02em;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .res-role {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            margin-top: 4px;
+        }
+
+        .res-highlight {
+            margin-top: 3.5rem;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
+            border-radius: 3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .res-highlight-text {
+            font-family: var(--display);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .res-highlight-text span { color: var(--accent); }
+
+        .res-highlight-sub {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ── SERVICES ── */
+        .services {
+            padding: clamp(80px, 10vw, 140px) 0;
+            background: var(--bg-elevated);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 80%, var(--accent-glow) 0%, transparent 45%),
+                radial-gradient(ellipse at 90% 10%, var(--accent-glow) 0%, transparent 40%);
+        }
+
+        .services .container { position: relative; z-index: 1; }
+        .services .section-heading { margin-bottom: 3.5rem; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .service-card {
+            background: var(--bg-elevated);
+            padding: clamp(28px, 3.5vw, 44px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.5s ease;
+        }
+
+        .service-card:hover::after { width: 100%; }
+        .service-card:hover { background: var(--bg-card); }
+
+        .service-num {
+            font-family: var(--display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 1.1rem;
+            letter-spacing: -0.04em;
+        }
+
+        .service-card:hover .service-num { color: var(--accent-pale); }
+
+        .service-title {
+            font-family: var(--display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-mid);
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 1.1rem;
+        }
+
+        .service-tag {
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(200, 149, 108, 0.2);
+            padding: 5px 11px;
+            border-radius: 2px;
+        }
+
+        /* ── AREAS ── */
+        .areas {
+            padding: clamp(80px, 10vw, 140px) 0;
+            position: relative;
+        }
+
+        .areas .container {
+            max-width: 1000px;
+        }
+
+        .areas .section-heading {
+            margin-bottom: 1.2rem;
+        }
+
+        .areas-sub {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-mid);
+            max-width: 560px;
+            margin-bottom: 3rem;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .area-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.35s ease;
+            border-radius: 3px;
+        }
+
+        .area-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+        }
+
+        .area-card svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .area-name {
+            font-family: var(--display);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .area-detail {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .areas-note {
+            margin-top: 2rem;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* ── PROCESS ── */
+        .process {
+            padding: clamp(80px, 10vw, 140px) 0;
+            background: var(--bg-elevated);
+        }
+
+        .process .container { max-width: 880px; }
+        .process .section-heading { margin-bottom: 3.5rem; text-align: center; }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 28px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .step-num {
+            font-family: var(--display);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: rgba(200, 149, 108, 0.15);
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        .step-title {
+            font-family: var(--display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-text {
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-mid);
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials {
+            padding: clamp(80px, 10vw, 140px) 0;
+        }
+
+        .testimonials .section-heading { margin-bottom: 3rem; }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .test-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: clamp(24px, 3vw, 36px);
+            border-radius: 4px;
+            transition: all 0.4s ease;
+        }
+
+        .test-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .test-stars svg { width: 13px; height: 13px; fill: var(--accent); }
+
+        .test-text {
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1.6rem;
+        }
+
+        .test-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .test-avatar {
+            width: 34px;
+            height: 34px;
+            background: var(--accent-pale);
+            border: 1px solid rgba(200, 149, 108, 0.15);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--display);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            border-radius: 50%;
+        }
+
+        .test-name {
+            font-family: var(--body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .test-event {
+            font-size: 0.68rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* ── GALLERY ── */
+        .gallery {
+            padding: clamp(60px, 8vw, 100px) 0;
+            overflow: hidden;
+            background: var(--bg-elevated);
+        }
+
+        .gallery-head { padding: 0 clamp(24px, 5vw, 72px); margin-bottom: 2.5rem; }
+
+        .gallery-track {
+            display: flex;
+            gap: 14px;
+            padding: 0 clamp(24px, 5vw, 72px);
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-track::-webkit-scrollbar { display: none; }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: clamp(220px, 18vw, 290px);
+            aspect-ratio: 3/4;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+        }
+
+        .gallery-item-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(15, 15, 15, 0.7), transparent 60%);
+            z-index: 2;
+        }
+
+        .gallery-item:nth-child(1) { background: linear-gradient(145deg, #2A2520, #1A1815); }
+        .gallery-item:nth-child(2) { background: linear-gradient(145deg, #252825, #151A15); }
+        .gallery-item:nth-child(3) { background: linear-gradient(145deg, #28251F, #1A1815); }
+        .gallery-item:nth-child(4) { background: linear-gradient(145deg, #222520, #151815); }
+        .gallery-item:nth-child(5) { background: linear-gradient(145deg, #25221E, #181614); }
+        .gallery-item:nth-child(6) { background: linear-gradient(145deg, #202522, #151A17); }
+
+        .gallery-item .gallery-vis {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            opacity: 0.15;
+        }
+
+        .gallery-vis .gbar {
+            width: 2px;
+            height: 30%;
+            background: var(--accent);
+            border-radius: 1px;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        .gallery-item:nth-child(1) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.12s); }
+        .gallery-item:nth-child(2) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.18s); }
+        .gallery-item:nth-child(3) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.1s); }
+        .gallery-item:nth-child(4) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.15s); }
+        .gallery-item:nth-child(5) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.13s); }
+        .gallery-item:nth-child(6) .gallery-vis .gbar { animation-delay: calc(var(--i) * 0.16s); }
+
+        .gallery-label {
+            font-family: var(--display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .gallery-type {
+            font-size: 0.62rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 3px;
+        }
+
+        /* ── CONTACT FORM ── */
+        .contact {
+            padding: clamp(80px, 10vw, 140px) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: clamp(40px, 6vw, 100px);
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            color: var(--text);
+            letter-spacing: -0.035em;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-info h2 .accent { color: var(--accent); }
+
+        .contact-sub {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.88rem;
+            color: var(--text-mid);
+        }
+
+        .contact-detail svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-detail a {
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-detail a:hover { color: var(--accent); }
+
+        .contact-form {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: clamp(28px, 3.5vw, 44px);
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--body);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            font-family: var(--body);
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 13px 16px;
+            border-radius: 3px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6560' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .form-group select option {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            width: 100%;
+            font-family: var(--body);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--accent);
+            padding: 16px 34px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            margin-top: 4px;
+        }
+
+        .form-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(200, 149, 108, 0.2);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 56px 0 36px;
+            background: var(--bg);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 36px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand {
+            font-family: var(--display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-brand span { color: var(--accent); }
+
+        .footer-tagline {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            line-height: 1.65;
+            max-width: 280px;
+        }
+
+        .footer-heading {
+            font-family: var(--body);
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: var(--text-dim);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .footer-social svg { width: 14px; height: 14px; }
+
+        /* ── RESPONSIVE ── */
+        /* ── AVAILABILITY ── */
+        .availability {
+            padding: clamp(80px, 10vw, 140px) 0;
+            position: relative;
+        }
+
+        .availability .section-heading { margin-bottom: 1rem; }
+
+        .avail-sub {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-mid);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .avail-sub a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(200, 149, 108, 0.3);
+            padding-bottom: 1px;
+            transition: border-color 0.3s ease;
+        }
+
+        .avail-sub a:hover { border-color: var(--accent); }
+
+        .avail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .avail-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
+            padding: 22px 24px;
+            border-radius: 3px;
+            transition: all 0.35s ease;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .avail-card:hover {
+            border-color: var(--border-hover);
+            border-left-color: var(--accent);
+            background: var(--bg-card);
+            transform: translateY(-2px);
+        }
+
+        .avail-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 58px;
+            padding: 8px 0;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            background: var(--bg);
+        }
+
+        .avail-day {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .avail-month {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        .avail-year {
+            font-size: 0.55rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .avail-body { min-width: 0; }
+
+        .avail-type {
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: inline-block;
+            padding: 3px 9px;
+            border: 1px solid rgba(200, 149, 108, 0.2);
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .avail-event {
+            font-family: var(--display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .avail-venue {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.5;
+        }
+
+        .avail-empty {
+            padding: 48px 32px;
+            text-align: center;
+            background: var(--bg-elevated);
+            border: 1px dashed var(--border);
+            border-radius: 3px;
+            grid-column: 1 / -1;
+        }
+
+        .avail-empty-title {
+            font-family: var(--display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .avail-empty-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-mid);
+        }
+
+        .avail-note {
+            margin-top: 2rem;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; gap: 48px; }
+            .hero-visual { max-width: 360px; }
+            .about .container { grid-template-columns: 1fr; }
+            .about-left { position: static; }
+            .res-groups { grid-template-columns: 1fr; gap: 40px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .test-grid { grid-template-columns: 1fr 1fr; }
+            .contact .container { grid-template-columns: 1fr; gap: 48px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .services-grid { grid-template-columns: 1fr; }
+            .test-grid { grid-template-columns: 1fr; }
+            .process-step { grid-template-columns: 44px 1fr; gap: 16px; }
+            .step-num { font-size: 1.8rem; }
+            .hero-badge { bottom: -10px; left: -10px; padding: 14px 20px; }
+            .footer-top { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom { flex-direction: column; gap: 18px; text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .areas-grid { grid-template-columns: 1fr 1fr; }
+            .trust-bar .container { gap: 16px; }
+            .trust-item { font-size: 0.68rem; }
+            .res-item { grid-template-columns: 1fr; }
+            .res-meta { text-align: left; }
+            .res-highlight { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .gallery-item { width: 190px; }
+            .areas-grid { grid-template-columns: 1fr; }
+            .avail-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">Adam Lewis <span>DJ</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#residencies">Residencies</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#availability">Availability</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact" class="nav-cta">Book Adam</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#residencies" class="mobile-link">Residencies</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#availability" class="mobile-link">Availability</a>
+        <a href="#reviews" class="mobile-link">Reviews</a>
+        <a href="#contact" class="mobile-link">Book Adam</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Bournemouth &amp; Dorset
+                </div>
+                <p class="hero-label">Former Hed Kandi Resident · 25+ Years</p>
+                <h1 class="hero-title">
+                    Festivals, clubs,<br>
+                    weddings &mdash; <span class="accent">one</span><br>
+                    safe pair of hands.
+                </h1>
+                <p class="hero-desc">
+                    I'm Adam Lewis. Christchurch Music Festival 2026, two years on the
+                    Henley Regatta main stage, summer residency at Cameo, and regular
+                    slots at Post, Aruba, Bar So and V Nightclub &mdash; based in
+                    Bournemouth, booked across the South Coast.
+                </p>
+                <div class="hero-actions">
+                    <a href="#availability" class="btn-primary">Check Availability</a>
+                    <a href="https://www.mixcloud.com/adam-david-lewis/" target="_blank" rel="noopener" class="btn-secondary">
+                        Listen on Mixcloud
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 8h10M9 4l4 4-4 4"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-frame">
+                    <div class="hero-vis">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                    <div class="hero-initials"><span>AL</span></div>
+                </div>
+                <div class="hero-badge">
+                    <div class="hero-badge-num">25+</div>
+                    <div class="hero-badge-label">Years on the decks &mdash; and still going</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Former Hed Kandi resident
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                25+ years experience
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                Festivals, clubs &amp; weddings
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Fully insured &amp; PAT tested
+            </div>
+        </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span class="marquee-item">Hed Kandi</span>
+            <span class="marquee-item">Henley Regatta</span>
+            <span class="marquee-item">Christchurch Music Festival</span>
+            <span class="marquee-item">V Nightclub</span>
+            <span class="marquee-item">Post</span>
+            <span class="marquee-item">Aruba</span>
+            <span class="marquee-item">Bar So</span>
+            <span class="marquee-item">Cameo</span>
+            <span class="marquee-item">Creation Brighton</span>
+            <span class="marquee-item">Destiny Plymouth</span>
+            <span class="marquee-item">Hed Kandi</span>
+            <span class="marquee-item">Henley Regatta</span>
+            <span class="marquee-item">Christchurch Music Festival</span>
+            <span class="marquee-item">V Nightclub</span>
+            <span class="marquee-item">Post</span>
+            <span class="marquee-item">Aruba</span>
+            <span class="marquee-item">Bar So</span>
+            <span class="marquee-item">Cameo</span>
+            <span class="marquee-item">Creation Brighton</span>
+            <span class="marquee-item">Destiny Plymouth</span>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-left reveal">
+                <p class="section-label">About</p>
+                <h2 class="section-heading">
+                    From farm raves<br>
+                    to festival stages.
+                </h2>
+            </div>
+            <div class="about-right">
+                <p class="about-text reveal">
+                    I got my first belt driving 70 disco decks at 13 &mdash; learning
+                    the craft on vinyl, the hard way. By 1994 I was putting on
+                    legendary raves at my family farm, and at 18 I landed my first
+                    warm-up residency at Destiny, Plymouth's biggest nightclub. I've
+                    been on the decks ever since.
+                </p>
+                <p class="about-text reveal" style="transition-delay: 0.1s;">
+                    After two years as a resident at Creation in Brighton and a
+                    couple of years DJing my way around the world, I came home to
+                    Bournemouth and joined the Hed Kandi residency. Since then I've
+                    held regular slots at Post, Aruba, Bar So, V Nightclub and more
+                    &mdash; working almost every weekend across the South Coast.
+                </p>
+                <p class="about-text reveal" style="transition-delay: 0.2s;">
+                    These days it's a mix of it all: Christchurch Music Festival,
+                    Henley Regatta main stage (two years running), the summer
+                    residency at Cameo's international student nights, weddings
+                    across Dorset and Hampshire, and the club nights that started
+                    it all. High-energy, all genres, no set-list &mdash; I read
+                    the room and play what works.
+                </p>
+                <div class="about-name reveal" style="transition-delay: 0.25s;">Adam Lewis</div>
+                <div class="about-role reveal" style="transition-delay: 0.25s;">DJ · Festivals, Clubs &amp; Events</div>
+                <div class="about-stats">
+                    <div class="about-stat reveal">
+                        <div class="stat-val">25+</div>
+                        <div class="stat-desc">Years</div>
+                    </div>
+                    <div class="about-stat reveal" style="transition-delay: 0.1s;">
+                        <div class="stat-val">10+</div>
+                        <div class="stat-desc">Residencies</div>
+                    </div>
+                    <div class="about-stat reveal" style="transition-delay: 0.2s;">
+                        <div class="stat-val">5.0</div>
+                        <div class="stat-desc">Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESIDENCIES -->
+    <section class="residencies" id="residencies">
+        <div class="container">
+            <p class="section-label reveal">Residencies &amp; Career</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                25 years of regular slots,<br>from farm raves to festivals.
+            </h2>
+            <p class="res-sub reveal" style="transition-delay: 0.2s;">
+                A working DJ every weekend &mdash; not a weekend warrior. Here's where
+                you can (or could) catch me on the decks.
+            </p>
+            <div class="res-groups">
+                <div class="reveal">
+                    <p class="res-group-label">Current Residencies &amp; Bookings</p>
+                    <div class="res-list">
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Christchurch Music Festival</div>
+                                <div class="res-role">Festival booking &mdash; 2026</div>
+                            </div>
+                            <div class="res-meta">Dorset</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Cameo</div>
+                                <div class="res-role">Summer residency &mdash; international student nights</div>
+                            </div>
+                            <div class="res-meta">Bournemouth</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Post</div>
+                                <div class="res-role">Regular resident</div>
+                            </div>
+                            <div class="res-meta">Bournemouth</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Aruba</div>
+                                <div class="res-role">Regular resident</div>
+                            </div>
+                            <div class="res-meta">Bournemouth</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Bar So</div>
+                                <div class="res-role">Regular resident</div>
+                            </div>
+                            <div class="res-meta">Bournemouth</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">V Nightclub</div>
+                                <div class="res-role">Regular resident</div>
+                            </div>
+                            <div class="res-meta">Bournemouth</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal" style="transition-delay: 0.1s;">
+                    <p class="res-group-label">Previous Residencies &amp; Highlights</p>
+                    <div class="res-list">
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Hed Kandi</div>
+                                <div class="res-role">Former resident DJ</div>
+                            </div>
+                            <div class="res-meta">UK</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Henley Royal Regatta</div>
+                                <div class="res-role">Main stage &mdash; two consecutive years</div>
+                            </div>
+                            <div class="res-meta">Oxfordshire</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Creation</div>
+                                <div class="res-role">Resident DJ</div>
+                            </div>
+                            <div class="res-meta">Brighton</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Destiny</div>
+                                <div class="res-role">First warm-up residency, age 18</div>
+                            </div>
+                            <div class="res-meta">Plymouth</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">International Tour</div>
+                                <div class="res-role">Guest slots worldwide &mdash; 2002-2004</div>
+                            </div>
+                            <div class="res-meta">Worldwide</div>
+                        </div>
+                        <div class="res-item">
+                            <div>
+                                <div class="res-name">Farm Raves</div>
+                                <div class="res-role">Legendary local raves, where it all started</div>
+                            </div>
+                            <div class="res-meta">Est. 1994</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="res-highlight reveal" style="transition-delay: 0.2s;">
+                <div>
+                    <div class="res-highlight-text">Second festival booking <span>confirmed for 2026</span> &mdash; announcement coming soon.</div>
+                    <div class="res-highlight-sub">Promoters and venues &mdash; get in touch for the latest availability.</div>
+                </div>
+                <a href="#availability" class="btn-secondary" style="font-size: 0.72rem; padding: 12px 22px; border: 1px solid var(--border-hover); color: var(--text); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px; transition: all 0.3s ease;">View Availability</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="container">
+            <p class="section-label reveal">Services</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                Whatever the event
+            </h2>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-num">01</div>
+                    <h3 class="service-title">Bars &amp; Venues</h3>
+                    <p class="service-desc">
+                        Regular and guest DJ slots for bars, restaurants, and nightlife
+                        venues across Bournemouth, Poole, and the surrounding area.
+                        Adaptable to your brand, your crowd, and your vibe.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Residencies</span>
+                        <span class="service-tag">Guest Slots</span>
+                        <span class="service-tag">Opening Nights</span>
+                    </div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.1s;">
+                    <div class="service-num">02</div>
+                    <h3 class="service-title">Weddings</h3>
+                    <p class="service-desc">
+                        Full wedding DJ packages from ceremony to last dance. Bespoke
+                        playlists, seamless transitions, and a dance floor that stays
+                        packed. Available at venues across Dorset, Hampshire, and beyond.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Ceremony</span>
+                        <span class="service-tag">Reception</span>
+                        <span class="service-tag">Evening Party</span>
+                    </div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.2s;">
+                    <div class="service-num">03</div>
+                    <h3 class="service-title">Corporate</h3>
+                    <p class="service-desc">
+                        Professional entertainment for conferences, awards dinners,
+                        product launches, and team celebrations. Polished, reliable,
+                        and perfectly suited to the occasion.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Awards</span>
+                        <span class="service-tag">Conferences</span>
+                        <span class="service-tag">Launches</span>
+                    </div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.3s;">
+                    <div class="service-num">04</div>
+                    <h3 class="service-title">Private Events</h3>
+                    <p class="service-desc">
+                        Birthdays, anniversaries, house parties, and celebrations.
+                        Personalised sets tailored to you, from intimate garden
+                        parties to milestone birthday bashes.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Birthdays</span>
+                        <span class="service-tag">Anniversaries</span>
+                        <span class="service-tag">Parties</span>
+                    </div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.35s;">
+                    <div class="service-num">05</div>
+                    <h3 class="service-title">Festivals &amp; Outdoor</h3>
+                    <p class="service-desc">
+                        Festival stages, outdoor events, and summer parties along the
+                        South Coast. Experienced with large-scale PA systems, beach
+                        parties, and festival crowds.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Festivals</span>
+                        <span class="service-tag">Garden Parties</span>
+                        <span class="service-tag">Beach Events</span>
+                    </div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.4s;">
+                    <div class="service-num">06</div>
+                    <h3 class="service-title">Charity &amp; Galas</h3>
+                    <p class="service-desc">
+                        Elegant entertainment for fundraisers, black-tie galas,
+                        and charity events. The right tone from arrival to close,
+                        with a professional presence throughout.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Fundraisers</span>
+                        <span class="service-tag">Black Tie</span>
+                        <span class="service-tag">Auctions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AREAS COVERED -->
+    <section class="areas" id="areas">
+        <div class="container">
+            <p class="section-label reveal">Areas Covered</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                Based in Bournemouth,<br>available across the South
+            </h2>
+            <p class="areas-sub reveal" style="transition-delay: 0.2s;">
+                I'm based on the South Coast and regularly DJ events across Dorset,
+                Hampshire, Wiltshire, and Somerset. Happy to travel further for the right event.
+            </p>
+            <div class="areas-grid">
+                <div class="area-card reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Bournemouth</div>
+                        <div class="area-detail">Home base</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.05s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Poole</div>
+                        <div class="area-detail">Harbour &amp; Sandbanks</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.1s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Christchurch</div>
+                        <div class="area-detail">Dorset</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.15s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">New Forest</div>
+                        <div class="area-detail">Hampshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.2s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Southampton</div>
+                        <div class="area-detail">Hampshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.25s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Dorchester</div>
+                        <div class="area-detail">West Dorset</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.3s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Salisbury</div>
+                        <div class="area-detail">Wiltshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.35s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Winchester</div>
+                        <div class="area-detail">Hampshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.4s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Wareham &amp; Purbeck</div>
+                        <div class="area-detail">Dorset</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.45s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Ringwood</div>
+                        <div class="area-detail">Hampshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.5s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Lymington</div>
+                        <div class="area-detail">Hampshire</div>
+                    </div>
+                </div>
+                <div class="area-card reveal" style="transition-delay: 0.55s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <div class="area-name">Wimborne</div>
+                        <div class="area-detail">Dorset</div>
+                    </div>
+                </div>
+            </div>
+            <p class="areas-note reveal" style="transition-delay: 0.6s;">
+                Further afield? No problem. I regularly travel across the South West and beyond for the right event &mdash; just get in touch.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process">
+        <div class="container">
+            <p class="section-label reveal" style="text-align: center;">How It Works</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                Simple from start to finish
+            </h2>
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <div class="step-num">01</div>
+                    <div>
+                        <h3 class="step-title">Get in Touch</h3>
+                        <p class="step-text">Drop me a message with your date, venue, and what you're looking for. I'll get back to you quickly with availability and a no-obligation quote.</p>
+                    </div>
+                </div>
+                <div class="process-step reveal" style="transition-delay: 0.1s;">
+                    <div class="step-num">02</div>
+                    <div>
+                        <h3 class="step-title">Plan the Set</h3>
+                        <p class="step-text">We'll discuss the vibe, the crowd, and any must-play or must-avoid tracks. For weddings and private events, I build a full bespoke running order tailored to your day.</p>
+                    </div>
+                </div>
+                <div class="process-step reveal" style="transition-delay: 0.2s;">
+                    <div class="step-num">03</div>
+                    <div>
+                        <h3 class="step-title">Setup &amp; Sound</h3>
+                        <p class="step-text">I arrive early and handle everything &mdash; professional-grade sound, lighting if needed, and a clean, discreet setup. I'll liaise with your venue to ensure everything runs smoothly.</p>
+                    </div>
+                </div>
+                <div class="process-step reveal" style="transition-delay: 0.3s;">
+                    <div class="step-num">04</div>
+                    <div>
+                        <h3 class="step-title">Deliver</h3>
+                        <p class="step-text">I read the room, manage the energy, and make sure your event sounds exactly how it should. Seamless, professional, and always in the moment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="reviews">
+        <div class="container">
+            <p class="section-label reveal">Reviews</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                What people say
+            </h2>
+            <div class="test-grid">
+                <div class="test-card reveal" style="transition-delay: 0.1s;">
+                    <div class="test-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                    </div>
+                    <p class="test-text">
+                        "Thanks for getting everyone up dancing for two years
+                        straight &mdash; the energy you bring behind the decks has
+                        been a huge part of what Post is."
+                    </p>
+                    <div class="test-author">
+                        <div class="test-avatar">M</div>
+                        <div>
+                            <div class="test-name">Matt</div>
+                            <div class="test-event">Post, Bournemouth</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="test-card reveal" style="transition-delay: 0.2s;">
+                    <div class="test-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                    </div>
+                    <p class="test-text">
+                        "Adam truly made my wedding day unforgettable. What a
+                        fantastic way to wrap up such a special day &mdash; the
+                        dance floor didn't stop."
+                    </p>
+                    <div class="test-author">
+                        <div class="test-avatar">HL</div>
+                        <div>
+                            <div class="test-name">Hannah Lee</div>
+                            <div class="test-event">Wedding</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="test-card reveal" style="transition-delay: 0.3s;">
+                    <div class="test-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.68 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>
+                    </div>
+                    <p class="test-text">
+                        "The music was top-notch all night long, and I really
+                        appreciate you mixing my playlist throughout the evening.
+                        Best DJ ever!"
+                    </p>
+                    <div class="test-author">
+                        <div class="test-avatar">AH</div>
+                        <div>
+                            <div class="test-name">Alison Haim</div>
+                            <div class="test-event">Private Event</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery">
+        <div class="gallery-head">
+            <p class="section-label reveal">Recent Events</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">From the booth</h2>
+        </div>
+        <div class="gallery-track">
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">Henley Royal Regatta</span>
+                    <span class="gallery-type">Main Stage · 2 Years</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">Hed Kandi</span>
+                    <span class="gallery-type">Former Resident</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">Post, Bournemouth</span>
+                    <span class="gallery-type">Resident · Est. 2022</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">V Nightclub</span>
+                    <span class="gallery-type">V Rocks Residency</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">Aruba</span>
+                    <span class="gallery-type">Beachfront Residency</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-vis">
+                    <div class="gbar" style="--i:0"></div><div class="gbar" style="--i:1"></div><div class="gbar" style="--i:2"></div>
+                    <div class="gbar" style="--i:3"></div><div class="gbar" style="--i:4"></div><div class="gbar" style="--i:5"></div>
+                    <div class="gbar" style="--i:6"></div><div class="gbar" style="--i:7"></div>
+                </div>
+                <div class="gallery-item-inner">
+                    <span class="gallery-label">Bar So &amp; Cameo</span>
+                    <span class="gallery-type">Bournemouth Nightlife</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AVAILABILITY -->
+    <section class="availability" id="availability">
+        <div class="container">
+            <p class="section-label reveal">Availability</p>
+            <h2 class="section-heading reveal" style="transition-delay: 0.1s;">
+                Upcoming dates<br>&amp; confirmed bookings
+            </h2>
+            <p class="avail-sub reveal" style="transition-delay: 0.2s;">
+                Dates I'm already booked for the coming months. Don't see your date?
+                I'm probably free &mdash; <a href="#contact">get in touch</a> and I'll
+                confirm within 24 hours.
+            </p>
+            <div class="avail-grid reveal" id="availGrid" style="transition-delay: 0.3s;"></div>
+            <p class="avail-note reveal" style="transition-delay: 0.4s;">
+                Dates shown are confirmed engagements only. Regular residency nights
+                (Post, Aruba, Bar So, V Nightclub, Cameo) are ongoing and not listed
+                individually &mdash; ask about specific weekends.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-info">
+                <p class="section-label reveal">Get in Touch</p>
+                <h2 class="reveal" style="transition-delay: 0.1s;">
+                    Got an event?<br>
+                    <span class="accent">Let's make it happen.</span>
+                </h2>
+                <p class="contact-sub reveal" style="transition-delay: 0.2s;">
+                    Festival, club night, wedding or private booking &mdash; drop me
+                    a line with the date, venue and what you're after. I'll come back
+                    to you within 24 hours.
+                </p>
+                <div class="contact-details reveal" style="transition-delay: 0.3s;">
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <a href="tel:+447341950521">07341 950521</a>
+                    </div>
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        <a href="mailto:adamlewis27@gmail.com">adamlewis27@gmail.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-4m3 4v-6m3 6v-8m3 8V8m3 10V6m3 12V4m3 14V8"/></svg>
+                        <a href="https://www.mixcloud.com/adam-david-lewis/" target="_blank" rel="noopener">Listen on Mixcloud</a>
+                    </div>
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Based in Bournemouth &mdash; available South Coast &amp; beyond
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form reveal" style="transition-delay: 0.15s;" onsubmit="event.preventDefault();">
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="your@email.co.uk">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType">
+                            <option value="" disabled selected>Select event type</option>
+                            <option>Festival</option>
+                            <option>Club Night / Residency</option>
+                            <option>Wedding</option>
+                            <option>Private Party</option>
+                            <option>Corporate Event</option>
+                            <option>Charity / Gala</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="date">Event Date</label>
+                        <input type="date" id="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="venue">Venue / Location</label>
+                    <input type="text" id="venue" placeholder="Venue name or area (e.g. Bournemouth, New Forest)">
+                </div>
+                <div class="form-group">
+                    <label for="message">Tell me about your event</label>
+                    <textarea id="message" placeholder="What are you looking for? Any specific requirements, music preferences, or questions?"></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Enquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand">Adam Lewis <span>DJ</span></div>
+                    <p class="footer-tagline">
+                        Former Hed Kandi resident. Festivals, club nights,
+                        weddings and private events across Bournemouth, Dorset
+                        &amp; the South Coast.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Navigate</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#residencies">Residencies</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#availability">Availability</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Book Adam</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Bookings For</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Festivals</a></li>
+                        <li><a href="#services">Club Nights</a></li>
+                        <li><a href="#services">Weddings</a></li>
+                        <li><a href="#services">Private Parties</a></li>
+                        <li><a href="#services">Corporate</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+447341950521">07341 950521</a></li>
+                        <li><a href="mailto:adamlewis27@gmail.com">adamlewis27@gmail.com</a></li>
+                        <li><a href="https://www.mixcloud.com/adam-david-lewis/" target="_blank" rel="noopener">Mixcloud</a></li>
+                        <li><a href="#availability">Check Availability</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2026 Adam Lewis DJ. Bournemouth, Dorset. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/>
+                            <circle cx="12" cy="12" r="5"/>
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.mixcloud.com/adam-david-lewis/" target="_blank" rel="noopener" aria-label="Mixcloud">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-4m3 4v-6m3 6v-8m3 8V8m3 10V6m3 12V4m3 14V8"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:adamlewis27@gmail.com" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <path d="M22 6l-10 7L2 6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ═══════════════════════════════════════════════════════════════════
+           BOOKED DATES — EDIT THIS LIST TO UPDATE YOUR AVAILABILITY
+
+           To add a booking: copy one of the lines below, paste it into the
+           list, and edit the date, event, venue and type.
+
+           Format for each entry:
+             { date: 'YYYY-MM-DD', event: 'Event name', venue: 'Venue / town', type: 'festival' }
+
+           'type' must be one of:  festival · residency · wedding · private · corporate
+
+           Rules:
+             - Use the format YYYY-MM-DD (e.g. 2026-08-15 for 15th August 2026).
+             - Past dates drop off automatically — no need to delete them.
+             - Put a comma after every line except (optionally) the last one.
+             - Save the file and refresh the page to see changes.
+           ═══════════════════════════════════════════════════════════════════ */
+        const BOOKED_DATES = [
+            { date: '2026-08-08', event: 'Christchurch Music Festival',  venue: 'Christchurch, Dorset',       type: 'festival' },
+            { date: '2026-07-18', event: 'Summer Residency — Cameo',     venue: 'International Students Night · Bournemouth', type: 'residency' },
+            { date: '2026-06-27', event: 'Summer Wedding',               venue: 'New Forest, Hampshire',      type: 'wedding' },
+            { date: '2026-09-12', event: 'Private 40th Birthday',        venue: 'Sandbanks, Poole',           type: 'private' },
+            // Add more bookings below — keep the same format:
+            // { date: '2026-10-04', event: 'Event name', venue: 'Venue / town', type: 'wedding' },
+        ];
+        /* ═══════════════════════════════════════════════════════════════════
+           END OF EDITABLE SECTION — nothing below needs changing.
+           ═══════════════════════════════════════════════════════════════════ */
+
+        (function renderAvailability() {
+            const grid = document.getElementById('availGrid');
+            if (!grid) return;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const typeLabels = {
+                festival:  'Festival',
+                residency: 'Residency',
+                wedding:   'Wedding',
+                private:   'Private Event',
+                corporate: 'Corporate'
+            };
+
+            const upcoming = BOOKED_DATES
+                .map(b => ({ ...b, _d: new Date(b.date) }))
+                .filter(b => !isNaN(b._d) && b._d >= today)
+                .sort((a, b) => a._d - b._d);
+
+            if (upcoming.length === 0) {
+                grid.innerHTML = `
+                    <div class="avail-empty">
+                        <div class="avail-empty-title">Diary's open</div>
+                        <div class="avail-empty-text">No confirmed dates on the calendar right now — which means I'm available. Drop me a line to book your event.</div>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = upcoming.map(b => {
+                const d = b._d;
+                const day = d.getDate();
+                const month = months[d.getMonth()];
+                const year = d.getFullYear();
+                const typeKey = (b.type || '').toLowerCase();
+                const typeLabel = typeLabels[typeKey] || 'Booked';
+                return `
+                    <div class="avail-card">
+                        <div class="avail-date">
+                            <div class="avail-day">${day}</div>
+                            <div class="avail-month">${month}</div>
+                            <div class="avail-year">${year}</div>
+                        </div>
+                        <div class="avail-body">
+                            <span class="avail-type">${typeLabel}</span>
+                            <div class="avail-event">${b.event}</div>
+                            <div class="avail-venue">${b.venue}</div>
+                        </div>
+                    </div>`;
+            }).join('');
+        })();
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Nav scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Gallery horizontal scroll
+        const gt = document.querySelector('.gallery-track');
+        if (gt) {
+            gt.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    e.preventDefault();
+                    gt.scrollLeft += e.deltaY;
+                }
+            }, { passive: false });
+        }
+    </script>
+</body>
+</html>

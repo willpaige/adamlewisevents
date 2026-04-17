@@ -1,0 +1,24 @@
+# deps
+node_modules
+.pnpm-store
+
+# next
+.next
+out
+build
+
+# misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+
+# env
+.env
+.env*.local
+
+# typescript
+next-env.d.ts
+
+# payload
+src/payload-types.ts
+src/app/(payload)/admin/importMap.js

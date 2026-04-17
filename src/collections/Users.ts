@@ -1,0 +1,18 @@
+import type { CollectionConfig } from "payload";
+
+export const Users: CollectionConfig = {
+  slug: "users",
+  auth: {
+    maxLoginAttempts: 0,
+  },
+  admin: {
+    useAsTitle: "email",
+    group: "System",
+  },
+  fields: [
+    {
+      name: "name",
+      type: "text",
+    },
+  ],
+};
