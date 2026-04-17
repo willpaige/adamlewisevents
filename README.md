@@ -14,7 +14,7 @@ Next.js 15 (App Router, React 19) site with Payload CMS v3 mounted inline. Prese
 
 ```bash
 cp .env.example .env
-# Edit .env — at minimum set DATABASE_URI and PAYLOAD_SECRET
+# Edit .env — at minimum set DATABASE_URL and PAYLOAD_SECRET
 pnpm install
 pnpm dev
 ```
@@ -59,9 +59,9 @@ Pages use ISR with `revalidate: 60`, so edits appear within a minute.
 
 ## Deploy to Vercel + Neon
 
-1. **Neon** — create a Postgres project. Copy the **pooled** connection string for `DATABASE_URI`. The build will apply migrations automatically.
+1. **Neon** — create a Postgres project. Copy the **pooled** connection string for `DATABASE_URL`. The build will apply migrations automatically.
 2. **Vercel** — import the repo. Set env vars:
-   - `DATABASE_URI` (pooled)
+   - `DATABASE_URL` (pooled)
    - `PAYLOAD_SECRET` (32+ random bytes: `openssl rand -base64 32`)
    - `NEXT_PUBLIC_SERVER_URL` (your production URL)
 3. Vercel runs `pnpm build` → `next build`.
