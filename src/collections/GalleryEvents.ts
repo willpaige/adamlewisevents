@@ -18,6 +18,12 @@ export const GalleryEvents: CollectionConfig = {
   fields: [
     { name: "label", type: "text", required: true },
     { name: "type", type: "text", required: true, admin: { description: 'e.g. "Summer Residency", "Royal Regatta"' } },
+    {
+      name: "image",
+      type: "upload",
+      relationTo: "media",
+      admin: { description: "Optional photo (replaces the animated bars)." },
+    },
     { name: "order", type: "number", defaultValue: 0 },
   ],
 };

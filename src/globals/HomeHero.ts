@@ -11,6 +11,14 @@ export const HomeHero: GlobalConfig = {
     { name: "heroTitle", type: "text", required: true },
     { name: "heroDescription", type: "textarea", required: true },
     {
+      name: "heroImage",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        description: "Optional photo displayed in the hero (replaces the animated bars + AL badge).",
+      },
+    },
+    {
       name: "primaryCta",
       type: "group",
       fields: [

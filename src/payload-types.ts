@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    media: Media;
     residencies: Residency;
     services: Service;
     'coverage-areas': CoverageArea;
@@ -83,6 +84,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     residencies: ResidenciesSelect<false> | ResidenciesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     'coverage-areas': CoverageAreasSelect<false> | CoverageAreasSelect<true>;
@@ -154,6 +156,54 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Short description for screen readers.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -270,6 +320,10 @@ export interface GalleryEvent {
    * e.g. "Summer Residency", "Royal Regatta"
    */
   type: string;
+  /**
+   * Optional photo (replaces the animated bars).
+   */
+  image?: (number | null) | Media;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -301,6 +355,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'residencies';
@@ -394,6 +452,58 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "residencies_select".
  */
 export interface ResidenciesSelect<T extends boolean = true> {
@@ -479,6 +589,7 @@ export interface ProcessStepsSelect<T extends boolean = true> {
 export interface GalleryEventsSelect<T extends boolean = true> {
   label?: T;
   type?: T;
+  image?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -572,6 +683,10 @@ export interface HomeHero {
   heroLabel?: string | null;
   heroTitle: string;
   heroDescription: string;
+  /**
+   * Optional photo displayed in the hero (replaces the animated bars + AL badge).
+   */
+  heroImage?: (number | null) | Media;
   primaryCta?: {
     label?: string | null;
     href?: string | null;
@@ -718,6 +833,7 @@ export interface HomeHeroSelect<T extends boolean = true> {
   heroLabel?: T;
   heroTitle?: T;
   heroDescription?: T;
+  heroImage?: T;
   primaryCta?:
     | T
     | {

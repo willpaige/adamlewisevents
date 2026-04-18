@@ -3,9 +3,11 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import sharp from "sharp";
 
 import { Users } from "./collections/Users";
+import { Media } from "./collections/Media";
 import { Residencies } from "./collections/Residencies";
 import { Services } from "./collections/Services";
 import { CoverageAreas } from "./collections/CoverageAreas";
@@ -38,6 +40,7 @@ export default buildConfig({
   },
   collections: [
     Users,
+    Media,
     Residencies,
     Services,
     CoverageAreas,
@@ -48,6 +51,13 @@ export default buildConfig({
     Submissions,
   ],
   globals: [SiteSettings, HomeHero, AboutPage, PageIntros],
+  plugins: [
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL!,

@@ -54,7 +54,11 @@ export function HeroSection({ hero }: { hero: Hero }) {
             ) : null}
           </div>
         </div>
-        <HeroVisual badgeNum={hero.badgeYears} badgeLabel={hero.badgeLabel} />
+        <HeroVisual
+          badgeNum={hero.badgeYears}
+          badgeLabel={hero.badgeLabel}
+          image={hero.heroImage}
+        />
       </div>
     </section>
   );

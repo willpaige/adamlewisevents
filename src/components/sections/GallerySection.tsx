@@ -1,6 +1,11 @@
 import { Reveal } from "../Reveal";
-import { GalleryCarousel } from "../GalleryCarousel";
-import type { GalleryEvent } from "@/payload-types";
+import { GalleryCarousel, type GalleryCarouselItem } from "../GalleryCarousel";
+import type { GalleryEvent, Media } from "@/payload-types";
+
+function resolveMedia(image: GalleryEvent["image"]): Media | null {
+  if (!image || typeof image === "number") return null;
+  return image;
+}
 
 export function GallerySection({
   items,
@@ -12,6 +17,17 @@ export function GallerySection({
   heading?: string;
 }) {
   if (items.length === 0) return null;
+  const carouselItems: GalleryCarouselItem[] = items.map((g) => {
+    const media = resolveMedia(g.image);
+    return {
+      label: g.label,
+      type: g.type,
+      imageUrl: media?.url ?? null,
+      imageAlt: media?.alt ?? null,
+      imageWidth: media?.width ?? null,
+      imageHeight: media?.height ?? null,
+    };
+  });
   return (
     <section className="gallery">
       <div className="gallery-head">
@@ -22,9 +38,7 @@ export function GallerySection({
           {heading}
         </Reveal>
       </div>
-      <GalleryCarousel
-        items={items.map((i) => ({ label: i.label, type: i.type }))}
-      />
+      <GalleryCarousel items={carouselItems} />
     </section>
   );
 }
