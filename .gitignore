@@ -16,5 +16,8 @@ build
 .env
 .env*.local
 
+# local media uploads (prod uses Vercel Blob)
+/media
+
 # typescript
 next-env.d.ts

@@ -10,6 +10,7 @@ export const Media: CollectionConfig = {
     read: () => true,
   },
   upload: {
+    staticDir: "media",
     mimeTypes: ["image/*"],
     imageSizes: [
       { name: "thumbnail", width: 480, height: undefined, position: "centre" },

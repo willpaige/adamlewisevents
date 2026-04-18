@@ -51,13 +51,15 @@ export default buildConfig({
     Submissions,
   ],
   globals: [SiteSettings, HomeHero, AboutPage, PageIntros],
-  plugins: [
-    vercelBlobStorage({
-      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-      collections: { media: true },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    }),
-  ],
+  plugins: process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        vercelBlobStorage({
+          enabled: true,
+          collections: { media: true },
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : [],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL!,
