@@ -50,5 +50,8 @@ export const HomeHero: GlobalConfig = {
         { name: "label", type: "text", required: true },
       ],
     },
+    { name: "videoUrl", type: "text", admin: { description: "YouTube URL (e.g. https://youtu.be/abc123). Leave blank to hide the section." } },
+    { name: "videoLabel", type: "text", admin: { description: 'Small label above the video, e.g. "Watch"' } },
+    { name: "videoHeading", type: "text", admin: { description: 'Heading above the video, e.g. "Hear the music"' } },
   ],
 };

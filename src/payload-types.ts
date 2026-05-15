@@ -716,6 +716,18 @@ export interface HomeHero {
         id?: string | null;
       }[]
     | null;
+  /**
+   * YouTube URL (e.g. https://youtu.be/abc123). Leave blank to hide the section.
+   */
+  videoUrl?: string | null;
+  /**
+   * Small label above the video, e.g. "Watch"
+   */
+  videoLabel?: string | null;
+  /**
+   * Heading above the video, e.g. "Hear the music"
+   */
+  videoHeading?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -862,6 +874,9 @@ export interface HomeHeroSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  videoUrl?: T;
+  videoLabel?: T;
+  videoHeading?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

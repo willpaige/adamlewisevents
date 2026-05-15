@@ -3,6 +3,7 @@ import { getPayload } from "@/lib/payload";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustBar } from "@/components/TrustBar";
 import { Marquee } from "@/components/Marquee";
+import { VideoSection } from "@/components/sections/VideoSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { GallerySection } from "@/components/sections/GallerySection";
@@ -29,6 +30,13 @@ export default async function HomePage() {
       <HeroSection hero={hero} />
       <TrustBar items={trustLabels} />
       <Marquee items={marqueeLabels} />
+      {hero?.videoUrl ? (
+        <VideoSection
+          videoUrl={hero.videoUrl}
+          videoLabel={hero.videoLabel}
+          videoHeading={hero.videoHeading}
+        />
+      ) : null}
       <AboutSection about={about} />
       <ServicesSection services={services.docs} />
       <GallerySection items={gallery.docs} />
