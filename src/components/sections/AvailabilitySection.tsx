@@ -59,9 +59,9 @@ export function AvailabilitySection({
           }))}
         />
         <Reveal as="p" className="avail-note" delay={0.4}>
-          Dates shown are confirmed engagements only. Regular residency nights (Post, Aruba,
-          Bar So, V Nightclub, Cameo) are ongoing and not listed individually — ask about
-          specific weekends.
+          Dates shown are confirmed bookings only. Weekly Cameo residency nights run continuously
+          and aren&apos;t listed individually. Direct enquiries are welcome, with agent bookings
+          managed alongside.
         </Reveal>
       </div>
     </section>

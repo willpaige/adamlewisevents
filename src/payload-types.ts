@@ -651,9 +651,10 @@ export interface SiteSetting {
   phone: string;
   email: string;
   mixcloudUrl: string;
+  youtubeUrl?: string | null;
   socialLinks?:
     | {
-        platform: 'instagram' | 'facebook' | 'mixcloud' | 'twitter' | 'tiktok' | 'other';
+        platform: 'instagram' | 'facebook' | 'mixcloud' | 'youtube' | 'twitter' | 'tiktok' | 'other';
         label: string;
         url: string;
         id?: string | null;
@@ -810,6 +811,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   phone?: T;
   email?: T;
   mixcloudUrl?: T;
+  youtubeUrl?: T;
   socialLinks?:
     | T
     | {

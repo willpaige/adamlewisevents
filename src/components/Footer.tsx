@@ -68,6 +68,13 @@ export async function Footer() {
                   <a href={`mailto:${settings.email}`}>{settings.email}</a>
                 </li>
               ) : null}
+              {settings?.youtubeUrl ? (
+                <li>
+                  <a href={settings.youtubeUrl} target="_blank" rel="noopener">
+                    YouTube
+                  </a>
+                </li>
+              ) : null}
               {settings?.mixcloudUrl ? (
                 <li>
                   <a href={settings.mixcloudUrl} target="_blank" rel="noopener">

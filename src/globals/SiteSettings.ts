@@ -9,6 +9,7 @@ export const SiteSettings: GlobalConfig = {
     { name: "phone", type: "text", required: true },
     { name: "email", type: "email", required: true },
     { name: "mixcloudUrl", type: "text", required: true },
+    { name: "youtubeUrl", type: "text" },
     {
       name: "socialLinks",
       type: "array",
@@ -21,6 +22,7 @@ export const SiteSettings: GlobalConfig = {
             { label: "Instagram", value: "instagram" },
             { label: "Facebook", value: "facebook" },
             { label: "Mixcloud", value: "mixcloud" },
+            { label: "YouTube", value: "youtube" },
             { label: "Twitter / X", value: "twitter" },
             { label: "Tiktok", value: "tiktok" },
             { label: "Other", value: "other" },

@@ -1,6 +1,6 @@
 import { Reveal } from "../Reveal";
 import { ContactForm } from "../ContactForm";
-import { PhoneIcon, EmailIcon, EqualizerIcon, MapPinIcon } from "../Icons";
+import { PhoneIcon, EmailIcon, EqualizerIcon, YoutubeIcon, MapPinIcon } from "../Icons";
 import type { SiteSetting } from "@/payload-types";
 
 type Intro = {
@@ -65,6 +65,14 @@ export function ContactSection({
               <div className="contact-detail">
                 <EmailIcon />
                 <a href={`mailto:${settings.email}`}>{settings.email}</a>
+              </div>
+            ) : null}
+            {settings?.youtubeUrl ? (
+              <div className="contact-detail">
+                <YoutubeIcon />
+                <a href={settings.youtubeUrl} target="_blank" rel="noopener">
+                  Watch on YouTube
+                </a>
               </div>
             ) : null}
             {settings?.mixcloudUrl ? (
