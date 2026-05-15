@@ -49,16 +49,35 @@ export function VideoSection({
             {videoHeading}
           </Reveal>
         ) : null}
-        <Reveal className="video-player" delay={videoHeading ? 0.2 : videoLabel ? 0.1 : 0}>
-          <div className="video-embed">
+        <Reveal
+          className="video-player"
+          delay={videoHeading ? 0.2 : videoLabel ? 0.1 : 0}
+          style={{ marginTop: videoHeading || videoLabel ? "2rem" : "4rem" }}
+        >
+          <div
+            className="video-embed"
+            style={{
+              position: "relative",
+              width: "100%",
+              paddingBottom: "56.25%",
+              height: 0,
+              overflow: "hidden",
+              borderRadius: "0.5rem",
+            }}
+          >
             <iframe
-              width="100%"
-              height="100%"
               src={`https://www.youtube.com/embed/${videoId}?rel=0`}
               title="Video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+              }}
             />
           </div>
         </Reveal>
