@@ -94,7 +94,7 @@ export function buildSiteGraph({
     telephone: toE164(settings?.phone),
     email: settings?.email ?? undefined,
     image,
-    logo: absUrl("/icon"),
+    logo: absUrl("/apple-icon"),
     address: compact({
       "@type": "PostalAddress",
       streetAddress: settings?.streetAddress ?? undefined,

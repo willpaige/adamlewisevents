@@ -29,23 +29,13 @@ export async function GET(req: NextRequest) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 8,
-              background: "#C8956C",
-              color: "#0F0F0F",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 30,
-              fontWeight: 800,
-              letterSpacing: -1,
-            }}
-          >
-            AL
-          </div>
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <rect width="64" height="64" rx="14" fill="#1C1C1C" />
+            <rect x="12" y="34" width="7" height="18" rx="3.5" fill="#C8956C" />
+            <rect x="23" y="20" width="7" height="32" rx="3.5" fill="#C8956C" />
+            <rect x="34" y="12" width="7" height="40" rx="3.5" fill="#C8956C" />
+            <rect x="45" y="26" width="7" height="26" rx="3.5" fill="#C8956C" />
+          </svg>
           <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>{SITE_NAME}</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>

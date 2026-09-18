@@ -13,7 +13,7 @@ Last reviewed: 18 September 2026. Baseline (DataForSEO, UK): site ranked for 4 k
   `FAQPage` and `BreadcrumbList`; area pages add `Service` + `FAQPage`; `/reviews` adds `Review`;
   `/availability` adds `Event`; the homepage adds `VideoObject` once a video publish date is set.
 - `/sitemap.xml`, `/robots.txt` (blocks `/admin`, `/api`, `/og`; open to AI crawlers), `/llms.txt`
-  (plain-text business summary for AI assistants), favicon and web manifest.
+  (plain-text business summary for AI assistants), favicon (`src/app/icon.svg`, equaliser mark) and web manifest.
 - `*.vercel.app` hostnames, `/admin` and `/api` send `X-Robots-Tag: noindex`.
 - New pages: `/services/<slug>` (6), `/areas/<slug>` (14), `/faq`, `/wedding-dj-cost-dorset`, `/areas`.
 
