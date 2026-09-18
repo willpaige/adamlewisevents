@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { getPayload } from "@/lib/payload";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { ResidenciesSection } from "@/components/sections/ResidenciesSection";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Residencies",
-  description: "25 years of regular slots — current residencies and highlights from Hed Kandi to Henley Royal Regatta.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "DJ Residencies — Post, Aruba, Bar So, V Nightclub, Cameo & Henley Royal Regatta",
+  description:
+    "25 years of regular DJ slots: current Bournemouth residencies at Post, Aruba, Bar So, V Nightclub and Cameo, plus Hed Kandi, Henley Royal Regatta and Christchurch Music Festival.",
+  path: "/residencies",
+});
 
 export default async function ResidenciesPage() {
   const payload = await getPayload();
@@ -18,7 +21,7 @@ export default async function ResidenciesPage() {
 
   return (
     <main style={{ paddingTop: "6rem" }}>
-      <ResidenciesSection residencies={residencies.docs} intro={intros?.residencies} />
+      <ResidenciesSection residencies={residencies.docs} intro={intros?.residencies} headingLevel="h1" />
     </main>
   );
 }

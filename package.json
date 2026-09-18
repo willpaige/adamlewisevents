@@ -15,7 +15,8 @@
     "lint": "next lint",
     "payload": "payload",
     "seed": "tsx scripts/seed.ts",
-    "generate:types": "payload generate:types"
+    "generate:types": "payload generate:types",
+    "seed:seo": "tsx scripts/seed-seo.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.40.0",

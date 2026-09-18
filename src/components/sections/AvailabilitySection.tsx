@@ -22,9 +22,11 @@ function renderMultiline(value?: string | null) {
 export function AvailabilitySection({
   bookings,
   intro,
+  headingLevel = "h2",
 }: {
   bookings: Booking[];
   intro?: Intro;
+  headingLevel?: "h1" | "h2";
 }) {
   return (
     <section className="availability" id="availability">
@@ -35,7 +37,7 @@ export function AvailabilitySection({
           </Reveal>
         ) : null}
         {intro?.heading ? (
-          <Reveal as="h2" className="section-heading" delay={0.1}>
+          <Reveal as={headingLevel} className="section-heading" delay={0.1}>
             {renderMultiline(intro.heading)}
           </Reveal>
         ) : null}

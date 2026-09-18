@@ -5,10 +5,12 @@ export function ProcessSection({
   steps,
   label = "How It Works",
   heading = "Simple from start to finish",
+  headingLevel = "h2",
 }: {
   steps: ProcessStep[];
   label?: string;
   heading?: string;
+  headingLevel?: "h1" | "h2";
 }) {
   return (
     <section className="process" id="process">
@@ -16,7 +18,7 @@ export function ProcessSection({
         <Reveal as="p" className="section-label" style={{ textAlign: "center" }}>
           {label}
         </Reveal>
-        <Reveal as="h2" className="section-heading" delay={0.1}>
+        <Reveal as={headingLevel} className="section-heading" delay={0.1}>
           {heading}
         </Reveal>
         <div className="process-steps">

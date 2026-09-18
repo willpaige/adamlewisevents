@@ -7,6 +7,7 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/residencies", label: "Residencies" },
   { href: "/services", label: "Services" },
+  { href: "/areas", label: "Areas" },
   { href: "/availability", label: "Availability" },
   { href: "/reviews", label: "Reviews" },
 ];
@@ -36,7 +37,7 @@ export function Nav() {
       <nav id="nav" className={scrolled ? "scrolled" : undefined}>
         <div className="container">
           <Link href="/" className="nav-logo" onClick={closeMenu}>
-            Adam Lewis <span>DJ</span>
+            Adam Lewis <span>Events</span>
           </Link>
           <ul className="nav-links">
             {links.map((link) => (

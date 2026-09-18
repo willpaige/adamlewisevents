@@ -2,6 +2,7 @@ import { Reveal } from "../Reveal";
 
 type VideoSectionProps = {
   videoUrl?: string | null;
+  videoTitle?: string | null;
   videoLabel?: string | null;
   videoHeading?: string | null;
 };
@@ -27,6 +28,7 @@ function extractYoutubeId(url: string): string | null {
 
 export function VideoSection({
   videoUrl,
+  videoTitle,
   videoLabel,
   videoHeading,
 }: VideoSectionProps) {
@@ -66,8 +68,10 @@ export function VideoSection({
             }}
           >
             <iframe
-              src={`https://www.youtube.com/embed/${videoId}?rel=0`}
-              title="Video player"
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
+              title={videoTitle ?? "Adam Lewis DJ — live showreel"}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

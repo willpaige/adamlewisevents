@@ -22,9 +22,11 @@ function renderMultiline(value?: string | null) {
 export function ContactSection({
   settings,
   intro,
+  headingLevel = "h2",
 }: {
   settings: Partial<SiteSetting> | null | undefined;
   intro?: Intro;
+  headingLevel?: "h1" | "h2";
 }) {
   return (
     <section className="contact" id="contact">
@@ -39,7 +41,7 @@ export function ContactSection({
               Get in Touch
             </Reveal>
           )}
-          <Reveal as="h2" delay={0.1}>
+          <Reveal as={headingLevel} delay={0.1}>
             {intro?.heading ? (
               renderMultiline(intro.heading)
             ) : (

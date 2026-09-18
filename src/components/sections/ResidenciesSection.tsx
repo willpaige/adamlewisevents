@@ -22,10 +22,12 @@ export function ResidenciesSection({
   residencies,
   intro,
   showHighlight = true,
+  headingLevel = "h2",
 }: {
   residencies: Residency[];
   intro?: Intro;
   showHighlight?: boolean;
+  headingLevel?: "h1" | "h2";
 }) {
   const current = residencies.filter((r) => r.status === "current");
   const previous = residencies.filter((r) => r.status === "previous");
@@ -35,7 +37,7 @@ export function ResidenciesSection({
       <div className="container">
         {intro?.label ? <Reveal as="p" className="section-label">{intro.label}</Reveal> : null}
         {intro?.heading ? (
-          <Reveal as="h2" className="section-heading" delay={0.1}>
+          <Reveal as={headingLevel} className="section-heading" delay={0.1}>
             {renderMultiline(intro.heading)}
           </Reveal>
         ) : null}

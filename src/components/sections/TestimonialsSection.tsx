@@ -13,11 +13,13 @@ export function TestimonialsSection({
   intro,
   heading = "What people say",
   label = "Reviews",
+  headingLevel = "h2",
 }: {
   testimonials: Testimonial[];
   intro?: Intro;
   heading?: string;
   label?: string;
+  headingLevel?: "h1" | "h2";
 }) {
   const sectionLabel = intro?.label ?? label;
   const sectionHeading = intro?.heading ?? heading;
@@ -26,7 +28,7 @@ export function TestimonialsSection({
       <div className="container">
         {sectionLabel ? <Reveal as="p" className="section-label">{sectionLabel}</Reveal> : null}
         {sectionHeading ? (
-          <Reveal as="h2" className="section-heading" delay={0.1}>
+          <Reveal as={headingLevel} className="section-heading" delay={0.1}>
             {sectionHeading}
           </Reveal>
         ) : null}

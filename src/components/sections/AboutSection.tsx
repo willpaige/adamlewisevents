@@ -11,15 +11,22 @@ function renderMultiline(value?: string | null) {
   ));
 }
 
-export function AboutSection({ about }: { about: Partial<AboutPage> | null | undefined }) {
+export function AboutSection({
+  about,
+  headingLevel = "h2",
+}: {
+  about: Partial<AboutPage> | null | undefined;
+  headingLevel?: "h1" | "h2";
+}) {
   if (!about) return null;
+  const Heading = headingLevel;
   return (
     <section className="about" id="about">
       <div className="container">
         <Reveal className="about-left">
           {about.label ? <p className="section-label">{about.label}</p> : null}
           {about.heading ? (
-            <h2 className="section-heading">{renderMultiline(about.heading)}</h2>
+            <Heading className="section-heading">{renderMultiline(about.heading)}</Heading>
           ) : null}
         </Reveal>
         <div className="about-right">

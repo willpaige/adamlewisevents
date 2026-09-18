@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { getPayload } from "@/lib/payload";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import { eventsSchema } from "@/lib/seo/schema";
+import { JsonLd } from "@/components/JsonLd";
 import { AvailabilitySection } from "@/components/sections/AvailabilitySection";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Availability",
-  description: "Upcoming confirmed bookings. Don't see your date? Get in touch.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "DJ Availability & Upcoming Dates — Bournemouth, Dorset & the South Coast",
+  description:
+    "Check Adam Lewis's confirmed DJ bookings for the coming months. Don't see your date? He's probably free — enquire and get a reply within 24 hours.",
+  path: "/availability",
+});
 
 export default async function AvailabilityPage() {
   const payload = await getPayload();
@@ -26,7 +31,8 @@ export default async function AvailabilityPage() {
 
   return (
     <main style={{ paddingTop: "6rem" }}>
-      <AvailabilitySection bookings={bookings.docs} intro={intros?.availability} />
+      {bookings.docs.length ? <JsonLd data={eventsSchema(bookings.docs)} /> : null}
+      <AvailabilitySection bookings={bookings.docs} intro={intros?.availability} headingLevel="h1" />
     </main>
   );
 }

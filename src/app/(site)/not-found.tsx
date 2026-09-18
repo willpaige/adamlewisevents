@@ -6,7 +6,7 @@ export default function NotFound() {
       <section className="contact">
         <div className="container" style={{ textAlign: "center" }}>
           <p className="section-label">404</p>
-          <h2 className="section-heading">Page not found</h2>
+          <h1 className="section-heading">Page not found</h1>
           <p className="contact-sub" style={{ marginTop: "1.5rem" }}>
             The page you were looking for doesn&apos;t exist — but the dance floor is still open.
           </p>

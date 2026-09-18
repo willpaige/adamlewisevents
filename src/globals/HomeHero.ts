@@ -53,5 +53,15 @@ export const HomeHero: GlobalConfig = {
     { name: "videoUrl", type: "text", admin: { description: "YouTube URL (e.g. https://youtu.be/abc123). Leave blank to hide the section." } },
     { name: "videoLabel", type: "text", admin: { description: 'Small label above the video, e.g. "Watch"' } },
     { name: "videoHeading", type: "text", admin: { description: 'Heading above the video, e.g. "Hear the music"' } },
+    { name: "videoTitle", type: "text", admin: { description: "Title of the video as it appears on YouTube (used for video search results)." } },
+    { name: "videoDescription", type: "textarea", admin: { description: "One or two sentences describing the video (used for video search results)." } },
+    {
+      name: "videoPublishedAt",
+      type: "date",
+      admin: {
+        description: "Date the video was published on YouTube. Required for Google video results.",
+        date: { pickerAppearance: "dayOnly", displayFormat: "d MMM yyyy" },
+      },
+    },
   ],
 };

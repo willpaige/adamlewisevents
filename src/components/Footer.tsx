@@ -6,24 +6,24 @@ const primaryLinks = [
   { href: "/about", label: "About" },
   { href: "/residencies", label: "Residencies" },
   { href: "/services", label: "Services" },
+  { href: "/areas", label: "Areas Covered" },
   { href: "/availability", label: "Availability" },
   { href: "/reviews", label: "Reviews" },
+  { href: "/faq", label: "FAQs" },
+  { href: "/wedding-dj-cost-dorset", label: "Wedding DJ Cost Guide" },
   { href: "/contact", label: "Book Adam" },
-];
-
-const bookingsLinks = [
-  { label: "Festivals" },
-  { label: "Club Nights" },
-  { label: "Weddings" },
-  { label: "Private Parties" },
-  { label: "Corporate" },
 ];
 
 export async function Footer() {
   const payload = await getPayload();
-  const settings = await payload.findGlobal({ slug: "site-settings" });
+  const [settings, services, areas] = await Promise.all([
+    payload.findGlobal({ slug: "site-settings" }),
+    payload.find({ collection: "services", limit: 10, sort: "order" }),
+    payload.find({ collection: "coverage-areas", limit: 20, sort: "order" }),
+  ]);
 
   const year = new Date().getFullYear();
+  const businessName = settings?.businessName?.trim() || "Adam Lewis Events";
 
   return (
     <footer>
@@ -31,7 +31,7 @@ export async function Footer() {
         <div className="footer-top">
           <div>
             <div className="footer-brand">
-              Adam Lewis <span>DJ</span>
+              Adam Lewis <span>Events</span>
             </div>
             <p className="footer-tagline">{settings?.footerTagline}</p>
           </div>
@@ -48,9 +48,19 @@ export async function Footer() {
           <div>
             <h4 className="footer-heading">Bookings For</h4>
             <ul className="footer-links">
-              {bookingsLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href="/services">{link.label}</Link>
+              {services.docs.map((s) => (
+                <li key={s.id}>
+                  <Link href={s.slug ? `/services/${s.slug}` : "/services"}>{s.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="footer-heading">Areas</h4>
+            <ul className="footer-links">
+              {areas.docs.map((a) => (
+                <li key={a.id}>
+                  <Link href={a.slug ? `/areas/${a.slug}` : "/areas"}>{a.name}</Link>
                 </li>
               ))}
             </ul>
@@ -66,6 +76,13 @@ export async function Footer() {
               {settings?.email ? (
                 <li>
                   <a href={`mailto:${settings.email}`}>{settings.email}</a>
+                </li>
+              ) : null}
+              {settings?.googleBusinessProfileUrl ? (
+                <li>
+                  <a href={settings.googleBusinessProfileUrl} target="_blank" rel="noopener">
+                    Google Reviews
+                  </a>
                 </li>
               ) : null}
               {settings?.youtubeUrl ? (
@@ -90,7 +107,7 @@ export async function Footer() {
         </div>
         <div className="footer-bottom">
           <p className="footer-copy">
-            © {year} Adam Lewis DJ. Bournemouth, Dorset. All rights reserved.
+            © {year} {businessName}. Bournemouth, Dorset. All rights reserved.
           </p>
           <div className="footer-social">
             <SocialIcons links={settings?.socialLinks} email={settings?.email} />

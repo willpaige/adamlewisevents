@@ -8,6 +8,8 @@ type RevealProps = {
   delay?: number;
   style?: CSSProperties;
   children: ReactNode;
+  /** Any extra props (e.g. `href` when `as={Link}`) are forwarded to the element. */
+  [prop: string]: unknown;
 };
 
 export function Reveal({
@@ -16,6 +18,7 @@ export function Reveal({
   delay,
   style,
   children,
+  ...rest
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -47,7 +50,7 @@ export function Reveal({
   };
 
   return (
-    <Component ref={ref} className={`reveal ${className}`.trim()} style={combinedStyle}>
+    <Component ref={ref} className={`reveal ${className}`.trim()} style={combinedStyle} {...rest}>
       {children}
     </Component>
   );

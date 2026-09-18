@@ -16,6 +16,7 @@ import { Bookings } from "./collections/Bookings";
 import { ProcessSteps } from "./collections/ProcessSteps";
 import { GalleryEvents } from "./collections/GalleryEvents";
 import { Submissions } from "./collections/Submissions";
+import { Pages } from "./collections/Pages";
 
 import { SiteSettings } from "./globals/SiteSettings";
 import { HomeHero } from "./globals/HomeHero";
@@ -35,7 +36,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
-      titleSuffix: " — Adam Lewis DJ",
+      titleSuffix: " — Adam Lewis Events",
     },
   },
   collections: [
@@ -48,6 +49,7 @@ export default buildConfig({
     Bookings,
     ProcessSteps,
     GalleryEvents,
+    Pages,
     Submissions,
   ],
   globals: [SiteSettings, HomeHero, AboutPage, PageIntros],

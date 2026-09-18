@@ -76,6 +76,7 @@ export interface Config {
     bookings: Booking;
     'process-steps': ProcessStep;
     'gallery-events': GalleryEvent;
+    pages: Page;
     submissions: Submission;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     bookings: BookingsSelect<false> | BookingsSelect<true>;
     'process-steps': ProcessStepsSelect<false> | ProcessStepsSelect<true>;
     'gallery-events': GalleryEventsSelect<false> | GalleryEventsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     submissions: SubmissionsSelect<false> | SubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -236,6 +238,9 @@ export interface Service {
    */
   number: string;
   title: string;
+  /**
+   * Short blurb shown on the service card.
+   */
   description: string;
   tags?:
     | {
@@ -244,6 +249,68 @@ export interface Service {
       }[]
     | null;
   order?: number | null;
+  /**
+   * URL segment, e.g. wedding-dj-bournemouth. Generated from the title if left blank.
+   */
+  slug?: string | null;
+  /**
+   * Main page heading (H1), e.g. "Wedding DJ in Bournemouth & Dorset"
+   */
+  heroHeading?: string | null;
+  /**
+   * One or two sentences under the heading.
+   */
+  intro?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Question & answer pairs shown on the page and published as FAQ structured data. Write answers as direct, complete sentences.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Areas to highlight on this service page (defaults to all).
+   */
+  relatedAreas?: (number | CoverageArea)[] | null;
+  /**
+   * Optional overrides for Google and social previews. Leave blank to use the defaults generated from the page content.
+   */
+  seo?: {
+    /**
+     * Browser/search title. Aim for 50–60 characters.
+     */
+    metaTitle?: string | null;
+    /**
+     * Search snippet. Aim for 140–160 characters.
+     */
+    metaDescription?: string | null;
+    /**
+     * Image shown when the page is shared on social (1200×630 ideal).
+     */
+    ogImage?: (number | null) | Media;
+    /**
+     * Hide this page from search engines and the sitemap.
+     */
+    noIndex?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -254,8 +321,81 @@ export interface Service {
 export interface CoverageArea {
   id: number;
   name: string;
+  /**
+   * Short label on the card, e.g. "Hampshire"
+   */
   detail?: string | null;
   order?: number | null;
+  /**
+   * URL segment, e.g. wedding-dj-bournemouth. Generated from the title if left blank.
+   */
+  slug?: string | null;
+  /**
+   * How this area is described to search engines.
+   */
+  schemaType?: ('City' | 'AdministrativeArea') | null;
+  /**
+   * Main page heading (H1), e.g. "Wedding & Event DJ in Poole"
+   */
+  heading?: string | null;
+  intro?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Venues Adam has played or regularly works with in this area.
+   */
+  nearbyVenues?:
+    | {
+        name: string;
+        type?: ('wedding' | 'club' | 'hotel' | 'festival' | 'other') | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Question & answer pairs shown on the page and published as FAQ structured data. Write answers as direct, complete sentences.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional overrides for Google and social previews. Leave blank to use the defaults generated from the page content.
+   */
+  seo?: {
+    /**
+     * Browser/search title. Aim for 50–60 characters.
+     */
+    metaTitle?: string | null;
+    /**
+     * Search snippet. Aim for 140–160 characters.
+     */
+    metaDescription?: string | null;
+    /**
+     * Image shown when the page is shared on social (1200×630 ideal).
+     */
+    ogImage?: (number | null) | Media;
+    /**
+     * Hide this page from search engines and the sitemap.
+     */
+    noIndex?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -330,6 +470,79 @@ export interface GalleryEvent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * URL segment, e.g. wedding-dj-bournemouth. Generated from the title if left blank.
+   */
+  slug?: string | null;
+  /**
+   * Small uppercase label above the heading, e.g. "Pricing guide"
+   */
+  label?: string | null;
+  /**
+   * Main page heading (H1). Defaults to the title.
+   */
+  heroHeading?: string | null;
+  intro?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Question & answer pairs shown on the page and published as FAQ structured data. Write answers as direct, complete sentences.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Show the FAQ list above the body text (for pages where the FAQs are the main content).
+   */
+  showFaqsFirst?: boolean | null;
+  /**
+   * Optional overrides for Google and social previews. Leave blank to use the defaults generated from the page content.
+   */
+  seo?: {
+    /**
+     * Browser/search title. Aim for 50–60 characters.
+     */
+    metaTitle?: string | null;
+    /**
+     * Search snippet. Aim for 140–160 characters.
+     */
+    metaDescription?: string | null;
+    /**
+     * Image shown when the page is shared on social (1200×630 ideal).
+     */
+    ogImage?: (number | null) | Media;
+    /**
+     * Hide this page from search engines and the sitemap.
+     */
+    noIndex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "submissions".
  */
 export interface Submission {
@@ -387,6 +600,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'gallery-events';
         value: number | GalleryEvent;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'submissions';
@@ -530,6 +747,26 @@ export interface ServicesSelect<T extends boolean = true> {
         id?: T;
       };
   order?: T;
+  slug?: T;
+  heroHeading?: T;
+  intro?: T;
+  body?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  relatedAreas?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noIndex?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -541,6 +778,34 @@ export interface CoverageAreasSelect<T extends boolean = true> {
   name?: T;
   detail?: T;
   order?: T;
+  slug?: T;
+  schemaType?: T;
+  heading?: T;
+  intro?: T;
+  body?: T;
+  nearbyVenues?:
+    | T
+    | {
+        name?: T;
+        type?: T;
+        url?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noIndex?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -591,6 +856,36 @@ export interface GalleryEventsSelect<T extends boolean = true> {
   type?: T;
   image?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  label?: T;
+  heroHeading?: T;
+  intro?: T;
+  body?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  showFaqsFirst?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noIndex?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -665,6 +960,60 @@ export interface SiteSetting {
    */
   locationTagline?: string | null;
   footerTagline?: string | null;
+  /**
+   * Exactly as it appears on Google Business Profile, e.g. "Adam Lewis Events"
+   */
+  businessName?: string | null;
+  /**
+   * Optional registered/trading name if different.
+   */
+  legalName?: string | null;
+  /**
+   * Google Maps share link for the business listing.
+   */
+  googleBusinessProfileUrl?: string | null;
+  /**
+   * Town, e.g. Bournemouth
+   */
+  addressLocality?: string | null;
+  /**
+   * County, e.g. Dorset
+   */
+  addressRegion?: string | null;
+  /**
+   * Optional — leave blank for a home-based business.
+   */
+  streetAddress?: string | null;
+  /**
+   * Optional outward code, e.g. BH1
+   */
+  postalCode?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  /**
+   * Rough price band shown to search engines, e.g. "££"
+   */
+  priceRange?: string | null;
+  /**
+   * One per line in schema.org format, e.g. "Mo-Su 09:00-22:00"
+   */
+  openingHours?: string | null;
+  /**
+   * Default image for social previews (1200×630). Also used as the business image.
+   */
+  defaultOgImage?: (number | null) | Media;
+  /**
+   * Google Analytics 4 measurement ID, e.g. "G-XXXXXXXXXX"
+   */
+  ga4MeasurementId?: string | null;
+  /**
+   * Google Search Console HTML-tag verification token (the content value only).
+   */
+  gscVerification?: string | null;
+  /**
+   * Bing Webmaster Tools msvalidate.01 token.
+   */
+  bingVerification?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -728,6 +1077,18 @@ export interface HomeHero {
    * Heading above the video, e.g. "Hear the music"
    */
   videoHeading?: string | null;
+  /**
+   * Title of the video as it appears on YouTube (used for video search results).
+   */
+  videoTitle?: string | null;
+  /**
+   * One or two sentences describing the video (used for video search results).
+   */
+  videoDescription?: string | null;
+  /**
+   * Date the video was published on YouTube. Required for Google video results.
+   */
+  videoPublishedAt?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -834,6 +1195,21 @@ export interface SiteSettingsSelect<T extends boolean = true> {
       };
   locationTagline?: T;
   footerTagline?: T;
+  businessName?: T;
+  legalName?: T;
+  googleBusinessProfileUrl?: T;
+  addressLocality?: T;
+  addressRegion?: T;
+  streetAddress?: T;
+  postalCode?: T;
+  latitude?: T;
+  longitude?: T;
+  priceRange?: T;
+  openingHours?: T;
+  defaultOgImage?: T;
+  ga4MeasurementId?: T;
+  gscVerification?: T;
+  bingVerification?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -877,6 +1253,9 @@ export interface HomeHeroSelect<T extends boolean = true> {
   videoUrl?: T;
   videoLabel?: T;
   videoHeading?: T;
+  videoTitle?: T;
+  videoDescription?: T;
+  videoPublishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
