@@ -34,13 +34,13 @@ services/areas/testimonials/bookings — do not run it against production.
 
 ## One-off setup (Will)
 
-1. **Vercel → Domains**: make `www.adamlewisevents.co.uk` primary, apex redirects to www (308).
-   Add env var `NEXT_PUBLIC_SITE_URL=https://www.adamlewisevents.co.uk` (all environments).
-2. **Google Search Console**: add a *Domain* property for `adamlewisevents.co.uk` (DNS TXT), or paste
-   the HTML-tag token into Site Settings → `gscVerification`. Submit `https://www.adamlewisevents.co.uk/sitemap.xml`.
+1. ~~**Vercel**: apex → www redirect~~ (already in place, 307) and `NEXT_PUBLIC_SITE_URL` — **done 18 Sep 2026** (set on production/preview/development).
+2. **Google Search Console**: HTML-tag token stored in Site Settings → `gscVerification` — **done 18 Sep 2026**.
+   Still to do: click *Verify* in GSC, then submit `https://www.adamlewisevents.co.uk/sitemap.xml`.
 3. **Bing Webmaster Tools**: import the GSC property (one click). Bing's index feeds ChatGPT/Copilot.
    Paste the `msvalidate.01` token into Site Settings → `bingVerification` if verifying by tag.
-4. **GA4**: create a property, paste the `G-…` ID into Site Settings → `ga4MeasurementId`.
+4. **GA4**: `G-RWHV5B7M3C` stored in Site Settings → `ga4MeasurementId` — **done 18 Sep 2026**. The tag
+   renders only on production (`VERCEL_ENV=production`), with `anonymize_ip`.
 5. Optional: Vercel → Deployment Protection → Standard, so previews are never crawlable.
 
 ## Google Business Profile (Adam — the biggest lever)
