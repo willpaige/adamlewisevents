@@ -109,7 +109,7 @@ export async function Footer() {
           <p className="footer-copy">
             © {year} {businessName}. Bournemouth, Dorset. All rights reserved.{" "}
             <a href="https://evolve-ai.co" target="_blank" rel="noopener" className="footer-credit">
-              Built by Evolve
+              Built by Evolve AI
             </a>
           </p>
           <div className="footer-social">
