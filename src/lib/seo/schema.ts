@@ -172,6 +172,7 @@ export function buildSiteGraph({
     url: SITE_URL,
     name,
     publisher: { "@id": BUSINESS_ID },
+    creator: { "@type": "Organization", name: "Evolve AI", url: "https://evolve-ai.co" },
     inLanguage: "en-GB",
   });
 
